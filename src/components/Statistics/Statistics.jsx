@@ -29,10 +29,16 @@ class Statistics extends React.Component {
   countTotalFeedback = (a, b, c) => {
     return a + b + c;
     };
+
+  
+  countPositiveFeedbackPercentage = (a, b, c) => {
+    let procentNumber = Math.round(a / (a + b + c) * 100);
+    return (procentNumber > 0 ? procentNumber : 0);
+    };
     
-    // countPositiveFeedbackPercentage()
 
   render() {
+    
     return (
       <section className={s.container}>
         <h1 className="">Please leave feedback</h1>
@@ -68,11 +74,11 @@ class Statistics extends React.Component {
                 </li>
                           <li>
             <p className={s.statistic}>
-              Positive feedback: {this.countTotalFeedback(
+              Positive feedback: {this.countPositiveFeedbackPercentage(
                 this.state.good,
                 this.state.neutral,
                 this.state.bad
-              )}
+              )} %
             </p>
           </li>
         </ul>
