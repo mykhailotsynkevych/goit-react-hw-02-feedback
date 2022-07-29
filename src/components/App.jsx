@@ -1,10 +1,55 @@
 import React from 'react';
+import Section from './Section/Section';
+import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import Statistics from './Statistics/Statistics';
 
-export const App = () => {
-  return (
-    <>
-      <Statistics good={0} neutral={0} bad={0} total={0} positivePercentage={0} />
-    </>
-  );
-};
+export class App extends React.Component {
+  state = {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
+
+  handleGood = () => {
+    this.setState(prevState => ({
+      good: prevState.good + 1,
+    }));
+  };
+
+  handleNeutral = () => {
+    this.setState(prevState => ({
+      neutral: prevState.neutral + 1,
+    }));
+  };
+
+  handleBad = () => {
+    this.setState(prevState => ({
+      bad: prevState.bad + 1,
+    }));
+  };
+
+  countTotalFeedback = (a, b, c) => {
+    return a + b + c;
+  };
+
+  countPositiveFeedbackPercentage = (a, b, c) => {
+    let procentNumber = Math.round((a / (a + b + c)) * 100);
+    return procentNumber > 0 ? procentNumber : 0;
+  };
+
+  render() {
+    const { good, neutral, bad } = this.state;
+    return (
+      <Section title="Please leave feedback">
+        <FeedbackOptions
+          options={0}
+          onLeaveFeedback={[this.handleGood, this.handleNeutral, this.handleBad]}
+        ></FeedbackOptions>
+        <Statistics good={good} neutral={neutral} bad={bad}
+          total={this.countTotalFeedback(good, neutral, bad)}
+          positivePercentage={this.countPositiveFeedbackPercentage(good, neutral, bad)}
+        ></Statistics>
+      </Section>
+    );
+  }
+}

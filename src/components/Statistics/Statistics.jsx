@@ -1,90 +1,34 @@
 import React from 'react';
 import s from './Statistics.module.css';
 
-class Statistics extends React.Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  };
-
-  handleGood = () => {
-    this.setState(prevState => ({
-      good: prevState.good + 1,
-    }));
-  };
-
-  handleNeutral = () => {
-    this.setState(prevState => ({
-      neutral: prevState.neutral + 1,
-    }));
-  };
-
-  handleBad = () => {
-    this.setState(prevState => ({
-      bad: prevState.bad + 1,
-    }));
-  };
-
-  countTotalFeedback = (a, b, c) => {
-    return a + b + c;
-    };
-
-  
-  countPositiveFeedbackPercentage = (a, b, c) => {
-    let procentNumber = Math.round(a / (a + b + c) * 100);
-    return (procentNumber > 0 ? procentNumber : 0);
-    };
-    
-
-  render() {
-    
-    return (
-      <section className={s.container}>
-        <h1 className="">Please leave feedback</h1>
-        <button type="button" className={s.button} onClick={this.handleGood}>
-          Good
-        </button>
-        <button type="button" className={s.button} onClick={this.handleNeutral}>
-          Neutral
-        </button>
-        <button type="button" className={s.button} onClick={this.handleBad}>
-          Bad
-        </button>
-
-        <h2 className="">Statistics</h2>
+const Statistics = ({good, neutral, bad, total, positivePercentage}) => {
+  return (
+    <>
+    <h2 className="">Statistics</h2>
         <ul>
           <li>
-            <p className={s.statistic}>Good: {this.state.good}</p>
+            <p className={s.statistic}>Good: {good}</p>
           </li>
           <li>
-            <p className={s.statistic}>Neutral: {this.state.neutral}</p>
+            <p className={s.statistic}>Neutral: {neutral}</p>
           </li>
           <li>
-            <p className={s.statistic}>Bad: {this.state.bad}</p>
+            <p className={s.statistic}>Bad: {bad}</p>
           </li>
           <li>
             <p className={s.statistic}>
-              Total: {this.countTotalFeedback(
-                this.state.good,
-                this.state.neutral,
-                this.state.bad
-              )}
+              Total: {total}
             </p>
                 </li>
                           <li>
             <p className={s.statistic}>
-              Positive feedback: {this.countPositiveFeedbackPercentage(
-                this.state.good,
-                this.state.neutral,
-                this.state.bad
-              )} %
+              Positive feedback: {positivePercentage} %
             </p>
           </li>
         </ul>
-      </section>
-    );
-  }
+    </>
+  )
+
 }
 
 export default Statistics;
