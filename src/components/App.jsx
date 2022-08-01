@@ -44,7 +44,6 @@ export class App extends React.Component {
     return (
       <>
         <FeedbackOptions
-          options={0}
           onLeaveFeedback={[this.handleGood, this.handleNeutral, this.handleBad]}
         ></FeedbackOptions>
       <Section title="Statistics">
