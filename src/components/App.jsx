@@ -1,4 +1,6 @@
 import React from 'react';
+import './App.css'
+
 import Section from './Section/Section';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import Statistics from './Statistics/Statistics';
@@ -37,7 +39,7 @@ export class App extends React.Component {
   render() {
     const { good, neutral, bad } = this.state;
     return (
-      <>
+      <div className='App'>
         <FeedbackOptions
           options={options}
           onLeaveFeedback={this.onButtonClick}
@@ -57,7 +59,7 @@ export class App extends React.Component {
             />
           )}
         </Section>
-      </>
+      </div>
     );
   }
 }
